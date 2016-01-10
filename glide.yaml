@@ -1,0 +1,5 @@
+package: datadog-metrics-tuner
+import:
+- package: gopkg.in/yaml.v2
+- package: github.com/zorkian/go-datadog-api
+- package: github.com/cenkalti/backoff

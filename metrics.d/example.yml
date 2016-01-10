@@ -1,0 +1,7 @@
+- name: METRIC_NAME
+  tags: ["TAG_NAME:TAG_VALUE", "FOO:BAR"]
+  value: 123
+
+- name: METRIC_NAME2
+  tags: ["TAG_NAME2:TAG_VALUE2", "FOO2:BAR2"]
+  value: 111
