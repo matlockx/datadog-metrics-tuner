@@ -1,8 +1,9 @@
-hash: c5ec33953c307e45338fe66fcf4aaed975f54d829359afe92b0622c1205ca92b
-updated: 2016-01-03T21:10:37.03093265Z
+hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+updated: 2016-01-12T10:32:05.733474397Z
 imports:
 - name: github.com/cenkalti/backoff
   version: 4dc77674aceaabba2c7e3da25d4c823edfb73f99
+  repo: https://github.com/cenkalti/backoff
 - name: github.com/zorkian/go-datadog-api
   version: 5b496bab79146aebb31568dfbf0fba8a65117399
 - name: gopkg.in/yaml.v2

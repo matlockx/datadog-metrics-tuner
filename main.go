@@ -12,6 +12,9 @@ import (
 	"time"
 )
 
+var gitHash = "No hash provided"
+var buildTime = "No build time provided"
+
 var apiKey = flag.String("api-key", "", "Datadog api key")
 var appKey = flag.String("app-key", "", "Datadog app key")
 var logIntervalInSeconds = flag.Int64("interval", 10, "Log interval in seconds.")
@@ -34,10 +37,12 @@ type metric struct {
 func main() {
 	flag.Parse()
 
-	configuredMetrics := readMetricsFromFiles()
-
+	log.Println("Git Commit Hash: ", gitHash)
+	log.Println("UTC Build Time : ", buildTime)
 	log.Println("Using API KEY ", *apiKey)
 	log.Println("Using APP KEY ", *appKey)
+
+	configuredMetrics := readMetricsFromFiles()
 	datadogClient := datadog.NewClient(*apiKey, *appKey)
 
 	ddmetrics := createDDMetrics(configuredMetrics)
@@ -92,7 +97,7 @@ func createDDMetrics(configuredMetrics []metric) []datadog.Metric {
 		}
 		ddmetrics = append(ddmetrics, ddmetric)
 		createdMetric := fmt.Sprintf("%#v", ddmetric)
-		log.Println("Logging: ", createdMetric)
+		log.Println("Will report the following metric: ", createdMetric)
 	}
 	return ddmetrics
 }
@@ -100,6 +105,6 @@ func createDDMetrics(configuredMetrics []metric) []datadog.Metric {
 func postMetrics(datadogClient *datadog.Client, metrics []datadog.Metric) {
 	log.Println("Updating", len(metrics), "metrics.")
 	if err := datadogClient.PostMetrics(metrics); err != nil {
-		log.Fatalln("Cannot log to datadog: ", err)
+		log.Println("ERROR: Cannot log to datadog: ", err)
 	}
 }
