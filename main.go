@@ -37,10 +37,16 @@ type metric struct {
 func main() {
 	flag.Parse()
 
-	log.Println("Git Commit Hash: ", gitHash)
-	log.Println("UTC Build Time : ", buildTime)
-	log.Println("Using API KEY ", *apiKey)
-	log.Println("Using APP KEY ", *appKey)
+	log.Println("")
+	log.Println("----------------------------------------------------------------")
+	log.Println("datadog-metrics-tuner")
+	log.Println("")
+	log.Println("Git Commit Hash: \t", gitHash)
+	log.Println("UTC Build Time: \t", buildTime)
+	log.Println("Using API KEY: \t", *apiKey)
+	log.Println("Using APP KEY: \t", *appKey)
+	log.Println("----------------------------------------------------------------")
+	log.Println("")
 
 	configuredMetrics := readMetricsFromFiles()
 	datadogClient := datadog.NewClient(*apiKey, *appKey)
@@ -55,8 +61,8 @@ func main() {
 }
 
 func readMetricsFromFiles() []metric {
-	log.Println("Parsing files from directory ", configDirPath)
 	configDir, _ := filepath.Abs(configDirPath)
+	log.Println("Parsing files from directory ", configDir)
 	files, err := ioutil.ReadDir(configDir)
 	if err != nil {
 		log.Fatalln("Dir [", configDirPath, "] not found: ", err)
